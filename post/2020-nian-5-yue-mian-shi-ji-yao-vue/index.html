@@ -1,0 +1,290 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2020年5月 | 一介码农</title>
+<link rel="shortcut icon" href="https://zhi-he.github.io/favicon.ico?v=1589334121043">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://zhi-he.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="2020年5月 | 一介码农 - Atom Feed" href="https://zhi-he.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="前言
+今天面了一家国企，具体哪家公司就不提了。本人17年毕业，但是16年底就在目前的公司一直工作，面试环节可以说是薄弱的可怜。面试官直指痛点，技术可以，但是表述不清楚。面试嘛，大部分都是聊着造火箭的技术，到公司之后拧螺丝。但是没办法，这是现..." />
+    <meta name="keywords" content="前端,面试" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://zhi-he.github.io">
+  <img class="avatar" src="https://zhi-he.github.io/images/avatar.png?v=1589334121043" alt="">
+  </a>
+  <h1 class="site-title">
+    一介码农
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              2020年5月
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-05-12
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://zhi-he.github.io/tag/InMpVVPPm/" class="post-tag">
+                  # 前端
+                </a>
+              
+                <a href="https://zhi-he.github.io/tag/t9PNOe_V3-/" class="post-tag">
+                  # 面试
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://zhi-he.github.io/post-images/2020-nian-5-yue-mian-shi-ji-yao-vue.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="前言">前言</h1>
+<p>今天面了一家国企，具体哪家公司就不提了。本人17年毕业，但是16年底就在目前的公司一直工作，面试环节可以说是薄弱的可怜。面试官直指痛点，技术可以，但是表述不清楚。面试嘛，大部分都是聊着造火箭的技术，到公司之后拧螺丝。但是没办法，这是现实。因此我努力回忆起了一些今天面试的内容，整理一下用作记录，接下来步入正题。</p>
+<h1 id="面试主要内容">面试主要内容：</h1>
+<ol>
+<li>SPA应用性能优化</li>
+<li>插槽的使用</li>
+<li>子父组件生命周期的加载顺序</li>
+<li>history和hash区别以及原理</li>
+<li>ES6的map使用</li>
+<li>聊一下ES5和ES6继承</li>
+<li>兄弟组件如何传值</li>
+<li>vuex如果实现状态管理，详细描述一下实现过程<br>
+暂时只能回想起这么多，看到这里你是否和我一样觉得这些都是我们日常用到的，但是深究其底层原理，又觉得好像只能说点皮毛。没关系，下面是我整理的资料，希望对各位再次面试的时候有用！</li>
+</ol>
+<h1 id="面试题目解析">面试题目解析</h1>
+<h2 id="1-前端性能优化">1. 前端性能优化</h2>
+<h3 id="减小代码体积">减小代码体积</h3>
+<h4 id="首先是开发时我们主要对自己代码的执行有认知怎么写才能做到代码量最小并且执行的更快">首先是开发时，我们主要对自己代码的执行有认知，怎么写，才能做到代码量最小并且执行的更快。</h4>
+<ul>
+<li>v-if和v-show，v-if是惰性的，只有条件为真的时候才会渲染，v-show是只要执行到此处，就会渲染元素，区分场景</li>
+<li>computed 和 watch，computed依赖其他数据进行数值计算，避免每次获取值时重新计算；watch是对数据的监听，对数据操作过多时，允许执行异步操作，限制操作频率，设置中间态。</li>
+<li>v-for遍历，务必为item 添加key，方便 Vue.js 内部机制精准找到该条列表数据。当 state 更新时，新的状态值和旧的状态值对比，较快地定位到 diff ；且v-for 比 v-if 优先级高，尽量在v-for中使用v-if以为可能只修改一个值，就需要遍历整个数据表，严重影响速度</li>
+<li>图片资源懒加载，使用 vue-lazyload</li>
+<li>路由懒加载，避免首页首页长时间白屏，开发路由时使用 import('./***.vue')</li>
+<li>第三方插件的按需引入，使用 babel-plugin-component</li>
+</ul>
+<h4 id="其次就是webpack为我们提供的方法我们尽管使用即可">其次就是webpack为我们提供的方法，我们尽管使用即可</h4>
+<ul>
+<li>对图片进行压缩，使用 image-webpack-loader</li>
+<li>提取公共代码，Webpack 内置了专门用于提取多个Chunk 中的公共部分的插件 CommonsChunkPlugin</li>
+<li>优化 SourceMap，具体看vue文档吧</li>
+</ul>
+<h4 id="web基础优化">web基础优化</h4>
+<ul>
+<li>服务端开启gzip压缩</li>
+<li>对静态资源进行浏览器缓存</li>
+<li>利用CDN从服务器上下载 CSS、js 和图片等文件时</li>
+</ul>
+<h2 id="2-插槽">2. 插槽</h2>
+<p>插槽就是Vue实现的一套内容分发的API，将<slot></slot>元素作为承载分发内容的出口。<br>
+* 普通插槽，当子组件绝大部分内容是固定的，只有局部内容变化，这时候可用插槽来实现<br>
+* 具名插槽，有时一个组件中部分内容固定的，但是其他部分分好几个模块变化，这时候可用具名，插槽在slot中添加name来为这个组件来添加多个插槽<br>
+* 作用域插槽，正常来讲父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。但是我们又希望在插槽中获取子组件中的数据，这时为了实现在父级的插槽内容中可用，我们可以将子组件的数据作为 <slot> 元素的一个 attribute 绑定上去。绑定在 <slot> 元素上的 attribute 被称为插槽 prop。</p>
+<h2 id="3-子父组件生命周期的加载顺序">3. 子父组件生命周期的加载顺序</h2>
+<ul>
+<li>父组件beforeCreated</li>
+<li>父组件created</li>
+<li>父组件beforeMounted</li>
+<li>子组件beforeCreated</li>
+<li>子组件created</li>
+<li>子组件beforeMounted</li>
+<li>子组件mounted</li>
+<li>父组件mounted</li>
+</ul>
+<blockquote></blockquote>
+<p>注意：<br>
+父组件的mounted是在最后执行的。<br>
+因此在子组件的mounted中渲染父组件在mounted阶段请求的数据，是会无反应的。因为子组件mounted渲染数据会发生在父组件mounted请求数据之前。</p>
+<h2 id="4-history和hash区别以及原理">4. history和hash区别以及原理</h2>
+<h2 id="5-es6的map使用">5. ES6的map使用</h2>
+<h2 id="6-聊一下es5和es6继承">6. 聊一下ES5和ES6继承</h2>
+<h2 id="7-兄弟组件如何传值">7. 兄弟组件如何传值</h2>
+<h2 id="8-vuex如果实现状态管理详细描述一下实现过程">8. vuex如果实现状态管理，详细描述一下实现过程</h2>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E4%B8%BB%E8%A6%81%E5%86%85%E5%AE%B9">面试主要内容：</a></li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90">面试题目解析</a>
+<ul>
+<li><a href="#1-%E5%89%8D%E7%AB%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96">1. 前端性能优化</a>
+<ul>
+<li><a href="#%E5%87%8F%E5%B0%8F%E4%BB%A3%E7%A0%81%E4%BD%93%E7%A7%AF">减小代码体积</a>
+<ul>
+<li><a href="#%E9%A6%96%E5%85%88%E6%98%AF%E5%BC%80%E5%8F%91%E6%97%B6%E6%88%91%E4%BB%AC%E4%B8%BB%E8%A6%81%E5%AF%B9%E8%87%AA%E5%B7%B1%E4%BB%A3%E7%A0%81%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%89%E8%AE%A4%E7%9F%A5%E6%80%8E%E4%B9%88%E5%86%99%E6%89%8D%E8%83%BD%E5%81%9A%E5%88%B0%E4%BB%A3%E7%A0%81%E9%87%8F%E6%9C%80%E5%B0%8F%E5%B9%B6%E4%B8%94%E6%89%A7%E8%A1%8C%E7%9A%84%E6%9B%B4%E5%BF%AB">首先是开发时，我们主要对自己代码的执行有认知，怎么写，才能做到代码量最小并且执行的更快。</a></li>
+<li><a href="#%E5%85%B6%E6%AC%A1%E5%B0%B1%E6%98%AFwebpack%E4%B8%BA%E6%88%91%E4%BB%AC%E6%8F%90%E4%BE%9B%E7%9A%84%E6%96%B9%E6%B3%95%E6%88%91%E4%BB%AC%E5%B0%BD%E7%AE%A1%E4%BD%BF%E7%94%A8%E5%8D%B3%E5%8F%AF">其次就是webpack为我们提供的方法，我们尽管使用即可</a></li>
+<li><a href="#web%E5%9F%BA%E7%A1%80%E4%BC%98%E5%8C%96">web基础优化</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-%E6%8F%92%E6%A7%BD">2. 插槽</a></li>
+<li><a href="#3-%E5%AD%90%E7%88%B6%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F">3. 子父组件生命周期的加载顺序</a></li>
+<li><a href="#4-history%E5%92%8Chash%E5%8C%BA%E5%88%AB%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86">4. history和hash区别以及原理</a></li>
+<li><a href="#5-es6%E7%9A%84map%E4%BD%BF%E7%94%A8">5. ES6的map使用</a></li>
+<li><a href="#6-%E8%81%8A%E4%B8%80%E4%B8%8Bes5%E5%92%8Ces6%E7%BB%A7%E6%89%BF">6. 聊一下ES5和ES6继承</a></li>
+<li><a href="#7-%E5%85%84%E5%BC%9F%E7%BB%84%E4%BB%B6%E5%A6%82%E4%BD%95%E4%BC%A0%E5%80%BC">7. 兄弟组件如何传值</a></li>
+<li><a href="#8-vuex%E5%A6%82%E6%9E%9C%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E8%AF%A6%E7%BB%86%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%8B%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B">8. vuex如果实现状态管理，详细描述一下实现过程</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://zhi-he.github.io/post/ge-ren-bo-ke-de-chong-yao-xing/">
+              <h3 class="post-title">
+                个人博客的重要性
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ef1603f190a7229ea2e9',
+    clientSecret: 'f9d9030a1b3ae3666da2bb49c29b0fc8d1117670',
+    repo: 'zhi-he.github.io',
+    owner: 'zhi-he',
+    admin: ['zhi-he'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://zhi-he.github.io" target="_blank">一介码农</a>
+  <a class="rss" href="https://zhi-he.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
