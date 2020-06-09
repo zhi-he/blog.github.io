@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://zhi-he.github.io</id>
     <title>一介码农</title>
-    <updated>2020-05-14T09:44:37.968Z</updated>
+    <updated>2020-06-09T12:29:19.583Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://zhi-he.github.io"/>
     <link rel="self" href="https://zhi-he.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://zhi-he.github.io/images/avatar.png</logo>
     <icon>https://zhi-he.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 一介码农</rights>
+    <entry>
+        <title type="html"><![CDATA[（JS基础）JavaScript中的String类型操作方法大全]]></title>
+        <id>https://zhi-he.github.io/javascript-zhong-de-string-lei-xing-cao-zuo-fang-fa-zong-jie/</id>
+        <link href="https://zhi-he.github.io/javascript-zhong-de-string-lei-xing-cao-zuo-fang-fa-zong-jie/">
+        </link>
+        <updated>2020-06-02T12:42:53.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[2020年5月面试纪要]]></title>
         <id>https://zhi-he.github.io/2020-nian-5-yue-mian-shi-ji-yao-vue/</id>

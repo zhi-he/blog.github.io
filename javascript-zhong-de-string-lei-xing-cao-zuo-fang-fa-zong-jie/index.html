@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>（JS基础）JavaScript中的String类型操作方法大全 | 一介码农</title>
+<meta name="description" content="百无一用是个“搬砖的”！！！">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://zhi-he.github.io/favicon.ico?v=1591705752159">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zhi-he.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-166619522-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-166619522-1');
+</script>
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://zhi-he.github.io">
+        <img class="avatar" src="https://zhi-he.github.io/images/avatar.png?v=1591705752159" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://zhi-he.github.io">
+        <h1 class="site-title">一介码农</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">（JS基础）JavaScript中的String类型操作方法大全</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-06-02</span>
+            
+          </div>
+          <div class="post-content">
+            <h2 id="前言">前言</h2>
+<p>大家是否有这种感觉，不论我们在平时的开发中，乃至面试中都离不开对<code>String</code>类型进行操作。每次用到某个方法时，总忍不住去百度一下🤣、谷歌一下😂。那么，我专门花一点时间来统计一下<code>JavaScript</code>中字符串的操作方法都有哪些，一方面加深记忆，一方面方便于大家。</p>
+<blockquote>
+<p>建议大家只把本文当做字典使用，用到的某个<code>Ctrl+F</code>查询即可，开发中查看更便于记忆，整篇记忆过于枯燥，当然也不可否认有天才可以过目不忘✌️！</p>
+</blockquote>
+<!-- ## String类型操作方法总结
+- [String对象](#String对象)
+- [String.raw()](#stringraw-获取一个模板字符串的原始字符串)
+- [String.length](#stringlength获取字符串长度)
+- [String.fromCharCode()](#stringfromcharcode-返回由指定的utf-16代码单元序列创建的字符串)
+- [String.fromCodePoint()](#stringfromcodepoint-返回使用指定的代码点序列创建的字符串)
+- [trim()](#trim-删除字符串两端空白字符)
+- [String.match()](#stringmatch-返回一个字符串匹配正则表达式的的结果)
+- [String.slice()](#stringslice-提取某个字符串的一部分)
+- [String.split()](#stringsplit-使用指定的分隔符字符串将一个string对象分割成子字符串数组)
+- [String.charAt()](#stringcharat-从一个字符串中返回指定的字符)
+- [String.concat()](#stringconcat-将一个或多个字符串与原字符串连接合并)
+- [String.padStart()](#stringpadstart-用当前字符串开始添加字符串以便产生的字符串达到给定的长度)
+- [String.padEnd()](#stringpadend-从当前字符串末尾添加字符串返回填充后达到指定长度的字符串)
+- [String.repeat()](#stringrepeat-构造并返回一个新字符串该字符串包含被连接在一起的指定数量的字符串的副本)
+- [String.search()](#stringsearch-执行正则表达式和-string-对象之间的一个搜索匹配)
+- [String.substr()](#stringsubstr-返回一个字符串中从指定位置开始到指定字符数的字符-注尽量用substring-替代它未来可能废弃)
+- [String.substring()](#stringsubstring-返回一个字符串在开始索引到结束索引之间的一个子集-或从开始索引直到字符串的末尾的一个子集)
+- [String.indexOf()](#stringindexof-返回调用它的-string-对象中第一次出现的指定值的索引如果未找到该值则返回--1)
+- [String.replace()](#stringreplace-返回一个由替换值replacement替换一些或所有匹配的模式pattern后的新字符串)
+- [String.valueOf()](#stringvalueof-返回一个string对象的原始值)
+- [String.startsWith()](#stringstartswith-判断当前字符串是否以另外一个给定的子字符串开头返回-true-或-false)
+- [String.endsWith()](#stringendswith-判断当前字符串是否是以另外一个给定的子字符串结尾的返回-true-或-false)
+- [String.includes()](#stringincludes-判断一个字符串是否包含在另一个字符串中返回-true-或-false)
+- [String.matchAll()](#stringmatchall-返回一个包含所有匹配正则表达式的结果及分组捕获组的迭代器)
+- [String.toString()](#stringtostring-返回指定对象的字符串形式)
+- [String.trimStart()](#stringtrimstart-从字符串的开头删除空格trimleft是此方法的别名)
+- [String.trimEnd()](#stringtrimend-从一个字符串的末端移除空白字符trimright-是这个方法的别名)
+- [String.normalize()](#stringnormalize-按照指定的一种-unicode-正规形式将当前字符串正规化如果该值不是字符串则首先将其转换为一个字符串)
+- [String.charCodeAt()](#stringcharcodeat-返回0到65535之间的整数表示给定索引处的utf-16代码单元)
+- [String.codePointAt()](#stringcodepointat-返回一个-unicode-编码点值的非负整数)
+- [String.lastIndexOf()](#stringlastindexof-返回调用string-对象的指定值最后一次出现的索引如果没找到这个特定值则返回-1-)
+- [String.toLowerCase()](#stringtolowercase-会将调用该方法的字符串值转为小写形式)
+- [String.toUpperCase()](#stringtouppercase-返回一个将调用字符串转换为大写形式的值如果这个值不是字符串则会被变成字符串)
+- [String&#91;@@iterator&#93;](#stringiterator-返回一个新的iterator对象它遍历字符串的代码点返回每一个代码点的字符串值)
+- [String.localeCompare()](#stringlocalecompare-返回一个数字来指示一个参考字符串是否在排序顺序前面或之后或与给定字符串相同)
+- [String.toLocaleLowerCase()](#stringtolocalelowercase-根据任何指定区域语言环境设置的大小写映射返回调用字符串被转换为小写的格式)
+- [String.toLocaleUpperCase()](#stringtolocaleuppercase-使用本地化locale-specific的大小写映射规则将输入的字符串转化成大写形式并返回结果字符串) -->
+<h3 id="string对象">String对象</h3>
+<p>String 全局对象是一个用于字符串或一个字符序列的构造函数</p>
+<h4 id="语法">语法</h4>
+<p><code>var str1 = 'abc'</code><br>
+<code>String(thing)</code><br>
+<code>new String(thing)</code></p>
+<h4 id="参数">参数</h4>
+<p>thing 可以转为字符串的值</p>
+<h4 id="返回值">返回值</h4>
+<p>生成的字符串</p>
+<h3 id="stringraw-获取一个模板字符串的原始字符串">String.raw() 获取一个模板字符串的原始字符串</h3>
+<p>是一个模板字符串的标签函数，用来获取一个模板字符串的原始字符串，如：占位符（ ${foo}）会被处理为它所代表的其他字符串，而转义字符（\n）不会。</p>
+<h4 id="语法-2">语法</h4>
+<p><code>String.raw(callSite, ...substitutions)</code><br>
+<code>String.raw \</code> templateString ``</p>
+<h4 id="参数-2">参数</h4>
+<p>** callSite ** 一个模板字符串的“调用点对象”。类似{ raw: ['foo', 'bar', 'baz'] }。<br>
+** ...substitutions ** 任意个可选的参数，表示任意个内插表达式对应的值。<br>
+** templateString **  模板字符串，可包含占位符（${...}）。</p>
+<h4 id="返回值-2">返回值</h4>
+<p>给定模板字符串的原始字符串。</p>
+<h4 id="示例">示例</h4>
+<pre><code>// String.raw(callSite, ...substitutions)
+// 正常情况下，你也许不需要将 String.raw() 当作函数调用。
+// 但是为了模拟 `t${0}e${1}s${2}t` 你可以这样做:
+String.raw({ raw: 'test' }, 0, 1, 2); // 't0e1s2t'
+String.raw({ raw: 'test' }, 0, 1, 2, 3); // 't0e1s2t'
+// 注意这个测试, 传入一个 string, 和一个类似数组的对象
+// 下面这个函数和 `foo${2 + 3}bar${'Java' + 'Script'}baz` 是相等的.
+String.raw({
+  raw: ['foo', 'bar', 'baz'] 
+}, 2 + 3, 'Java' + 'Script'); // 'foo5barJavaScriptbaz'
+
+// String.raw`templateString`
+String.raw`Hi\n${2+3}!`;
+// 'Hi\n5!'，Hi 后面的字符不是换行符，\ 和 n 是两个不同的字符
+
+String.raw `Hi\u000A!`;             
+// &quot;Hi\u000A!&quot;，同上，这里得到的会是 \、u、0、0、0、A 6个字符，
+// 任何类型的转义形式都会失效，保留原样输出，不信你试试.length
+let name = &quot;Bob&quot;;
+String.raw `Hi\n${name}!`;             
+// &quot;Hi\nBob!&quot;，内插表达式还可以正常运行
+</code></pre>
+<h3 id="stringlength-获取字符串长度">String.length 获取字符串长度</h3>
+<p>返回一个字符串的长度<br>
+注：该属性返回字符串中字符编码单元的数量。JavaScript 使用 UTF-16 编码，该编码使用一个 16 比特的编码单元来表示大部分常见的字符，使用两个代码单元表示不常用的字符。因此 length 返回值可能与字符串中实际的字符数量不相同。String.length为1</p>
+<h4 id="示例-2">示例</h4>
+<pre><code>var str = 'abc'
+str.length // 3
+</code></pre>
+<h3 id="stringfromcharcode-返回由指定的utf-16代码单元序列创建的字符串">String.fromCharCode() 返回由指定的UTF-16代码单元序列创建的字符串</h3>
+<h4 id="语法-3">语法</h4>
+<p><code>String.fromCharCode(num1, ..., numN)</code></p>
+<h4 id="参数-3">参数</h4>
+<p>** num1, ..., numN ** 一系列UTF-16代码单元的数字。 范围介于0到65535（0xFFFF）之间。 大于0xFFFF的数字将被截断。 不进行有效性检查。</p>
+<h4 id="示例-3">示例</h4>
+<pre><code>String.fromCharCode(65, 66, 67);     // 'ABC'
+String.fromCharCode(0x2014);         // '-'
+String.fromCharCode(0x12014);       // '-'，这里数字1被截断并忽略
+</code></pre>
+<h3 id="stringfromcodepoint-返回使用指定的代码点序列创建的字符串">String.fromCodePoint() 返回使用指定的代码点序列创建的字符串</h3>
+<p>静态方法返回使用指定的代码点序列创建的字符串。</p>
+<h4 id="语法-4">语法</h4>
+<p><code>String.fromCodePoint(num1[, ...[, numN]])</code></p>
+<h4 id="参数-4">参数</h4>
+<p>** num1, ..., numN ** 一串 Unicode 编码位置，即“代码点”。</p>
+<h4 id="返回值-3">返回值</h4>
+<p>使用指定的 Unicode 编码位置创建的字符串。</p>
+<h4 id="示例-4">示例</h4>
+<pre><code>String.fromCodePoint(42);       // &quot;*&quot;
+String.fromCodePoint(65, 90);   // &quot;AZ&quot;
+String.fromCodePoint(0x404);    // &quot;\u0404&quot;
+String.fromCodePoint(0x2F804);  // &quot;\uD87E\uDC04&quot;
+String.fromCodePoint(194564);   // &quot;\uD87E\uDC04&quot;
+String.fromCodePoint(0x1D306, 0x61, 0x1D307) // &quot;\uD834\uDF06a\uD834\uDF07&quot;
+
+String.fromCodePoint('_');      // RangeError
+String.fromCodePoint(Infinity); // RangeError
+String.fromCodePoint(-1);       // RangeError
+String.fromCodePoint(3.14);     // RangeError
+String.fromCodePoint(3e-2);     // RangeError
+String.fromCodePoint(NaN);      // RangeError
+
+// String.fromCharCode() 方法不能单独获取在高代码点位上的字符
+// 另一方面，下列的示例中，可以返回 4 字节，也可以返回 2 字节的字符
+// (也就是说，它可以返回单独的字符，使用长度 2 代替 1!） 
+String.fromCodePoint(0x2F804) // 或者十进制的194564
+</code></pre>
+<h3 id="trim-删除字符串两端空白字符">trim() 删除字符串两端空白字符</h3>
+<p>从一个字符串的两端删除空白字符。在这个上下文中的空白字符是所有的空白字符 (space, tab, no-break space 等) 以及所有行终止符字符（如 LF，CR等）。** 不改变原字符串 **</p>
+<h4 id="语法-5">语法</h4>
+<p><code>str.trim()</code></p>
+<h4 id="返回值-4">返回值</h4>
+<p>一个代表调用字符串两端去掉空白的新字符串。</p>
+<h3 id="match-返回一个字符串匹配正则表达式的的结果">match() 返回一个字符串匹配正则表达式的的结果</h3>
+<p>match() 方法检索返回一个字符串匹配正则表达式的的结果。** 不改变原字符串 **</p>
+<h4 id="语法-6">语法</h4>
+<p><code>str.match(regexp)</code></p>
+<h4 id="参数-5">参数</h4>
+<p>** regexp ** 一个正则表达式对象。如果传入一个非正则表达式对象，则会隐式地使用 new RegExp(obj) 将其转换为一个 RegExp 。如果你没有给出任何参数并直接使用match() 方法 ，你将会得到一 个包含空字符串的 Array ：[&quot;&quot;] 。</p>
+<h4 id="返回值-5">返回值</h4>
+<p>如果使用g标志，则将返回与完整正则表达式匹配的所有结果，但不会返回捕获组。<br>
+如果未使用g标志，则仅返回第一个完整匹配及其相关的捕获组（Array）。 在这种情况下，返回的项目将具有如下所述的其他属性。</p>
+<h4 id="附加属性">附加属性</h4>
+<p>如上所述，匹配的结果包含如下所述的附加特性。</p>
+<ul>
+<li>groups: 一个捕获组数组 或 undefined（如果没有定义命名捕获组）。</li>
+<li>index: 匹配的结果的开始位置</li>
+<li>input: 搜索的字符串.<br>
+一个Array，其内容取决于global（g）标志的存在与否，如果未找到匹配则为null。</li>
+</ul>
+<h4 id="示例-5">示例</h4>
+<ul>
+<li>例子1<br>
+在下例中，使用 match 查找 &quot;Chapter&quot; 紧跟着 1 个或多个数值字符，再紧跟着一个小数点和数值字符 0 次或多次。正则表达式包含 i 标志，因此大小写会被忽略。</li>
+</ul>
+<pre><code>var str = 'For more information, see Chapter 3.4.5.1';
+var re = /see (chapter \d+(\.\d)*)/i;
+var found = str.match(re);
+
+console.log(found);
+
+// logs [ 'see Chapter 3.4.5.1',
+//        'Chapter 3.4.5.1',
+//        '.1',
+//        index: 22,
+//        input: 'For more information, see Chapter 3.4.5.1' ]
+
+// 'see Chapter 3.4.5.1' 是整个匹配。
+// 'Chapter 3.4.5.1' 被'(chapter \d+(\.\d)*)'捕获。
+// '.1' 是被'(\.\d)'捕获的最后一个值。
+// 'index' 属性(22) 是整个匹配从零开始的索引。
+// 'input' 属性是被解析的原始字符串。
+</code></pre>
+<h3 id="slice-提取某个字符串的一部分">slice() 提取某个字符串的一部分</h3>
+<p>提取某个字符串的一部分，并返回一个新的字符串。** 不改变原字符串 **</p>
+<blockquote>
+<p>提取的新字符串包括beginIndex但不包括 endIndex</p>
+</blockquote>
+<h4 id="语法-7">语法</h4>
+<p><code>str.slice(beginIndex[, endIndex])</code></p>
+<h4 id="参数-6">参数</h4>
+<p>** beginIndex ** 从该索引（以 0 为基数）处开始提取原字符串中的字符。如果值为负数，会被当做 strLength + beginIndex 看待，这里的strLength 是字符串的长度（例如， 如果 beginIndex 是 -3 则看作是：strLength - 3）<br>
+** endIndex ** 可选。在该索引（以 0 为基数）处结束提取字符串。如果省略该参数，slice() 会一直提取到字符串末尾。如果该参数为负数，则被看作是 strLength + endIndex，这里的 strLength 就是字符串的长度(例如，如果 endIndex 是 -3，则是, strLength - 3)。</p>
+<h4 id="返回值-6">返回值</h4>
+<p>返回一个从原字符串中提取出来的新字符串</p>
+<h4 id="示例-6">示例</h4>
+<pre><code>var str1 = 'The morning is upon us.', // str1 的长度 length 是 23。
+str1.slice(1, 8); // he morn
+str1.slice(4, -2); // morning is upon u
+str1.slice(12); // is upon us.
+str1.slice(30); // &quot;&quot;
+
+var str = 'The morning is upon us.';
+str.slice(-3);     //  'us.'
+str.slice(-3, -1); //  'us'
+str.slice(0, -1);  //  'The morning is upon us'
+</code></pre>
+<h3 id="split-字符串分割成数组">split() 字符串分割成数组</h3>
+<p>使用指定的分隔符字符串将一个String对象分割成子字符串数组，以一个指定的分割字串来决定每个拆分的位置。 ** 不改变原字符串 **</p>
+<h4 id="语法-8">语法</h4>
+<p><code>str.split([separator[, limit]])</code></p>
+<blockquote>
+<p>注意：如果使用空字符串(“)作为分隔符，则字符串不是在每个用户感知的字符(图形素集群)之间，也不是在每个Unicode字符(代码点)之间，而是在每个UTF-16代码单元之间。这会摧毁代理对。还请参见如何在JavaScript中获得字符串到字符数组？堆积如山。</p>
+</blockquote>
+<h4 id="参数-7">参数</h4>
+<p>** separator ** 指定表示每个拆分应发生的点的字符串。separator 可以是一个字符串或正则表达式。如果纯文本分隔符包含多个字符，则必须找到整个字符串来表示分割点。如果在str中省略或不出现分隔符，则返回的数组包含一个由整个字符串组成的元素。如果分隔符为空字符串，则将str原字符串中每个字符的数组形式返回。<br>
+** limit ** 一个整数，限定返回的分割片段数量。当提供此参数时，split 方法会在指定分隔符的每次出现时分割该字符串，但在限制条目已放入数组时停止。如果在达到指定限制之前达到字符串的末尾，它可能仍然包含少于限制的条目。新数组中不返回剩下的文本。</p>
+<h4 id="返回值-7">返回值</h4>
+<p>返回源字符串以分隔符出现位置分隔而成的一个 Array</p>
+<h4 id="示例-7">示例</h4>
+<pre><code>// 简单分隔
+var str = 'abc';
+str.split('b'); // ['a', 'c']
+// 移出字符串中的空格
+var names = &quot;Harry Trump ;Fred Barney; Helen Rigby ; Bill Abel ;Chris Hand &quot;;
+var re = /\s*(?:;|$)\s*/;
+names.split(re); // [ &quot;Harry Trump&quot;, &quot;Fred Barney&quot;, &quot;Helen Rigby&quot;, &quot;Bill Abel&quot;, &quot;Chris Hand&quot;, &quot;&quot; ]
+// 限制返回值中分割元素数量
+var myString = &quot;Hello World. How are you doing?&quot;;
+myString.split(&quot; &quot;, 3); // [&quot;Hello&quot;, &quot;World.&quot;, &quot;How&quot;]
+// 使用一个数组来作为分隔符
+const myString = 'ca,bc,a,bca,bca,bc';
+myString.split(['a','b']); //[&quot;c&quot;, &quot;c,&quot;, &quot;c&quot;, &quot;c&quot;, &quot;c&quot;]
+// 颠倒自付费
+</code></pre>
+<h3 id="charat-从一个字符串中返回指定的字符">charAt() 从一个字符串中返回指定的字符</h3>
+<h4 id="语法-9">语法</h4>
+<p><code>str.charAt(index)</code></p>
+<h4 id="参数-8">参数</h4>
+<p>** index ** 一个介于0 和字符串长度减1之间的整数。 (0~length-1)，如果没有提供索引，charAt() 将使用0。</p>
+<h4 id="示例-8">示例</h4>
+<pre><code>var str = 'abc'
+anyString.charAt(0); // a
+</code></pre>
+<h3 id="concat-将一个或多个字符串与原字符串连接合并">concat() 将一个或多个字符串与原字符串连接合并</h3>
+<h4 id="语法-10">语法</h4>
+<p><code>str.concat(string2, string3[, ..., stringN])</code></p>
+<h4 id="参数-9">参数</h4>
+<p>** string2...stringN **和原字符串连接的多个字符串</p>
+<h4 id="示例-9">示例</h4>
+<pre><code>var hello = &quot;Hello, &quot;;
+hello.concat(&quot;Kevin&quot;, &quot; have a nice day.&quot;) /* Hello, Kevin have a nice day. */
+</code></pre>
+<blockquote>
+<p>由于性能问题强烈建议使用 赋值操作符（+, +=）代替 concat 方法，</p>
+</blockquote>
+<h3 id="padstart-用当前字符串开始添加字符串以便产生的字符串达到给定的长度">padStart() 用当前字符串开始添加字符串，以便产生的字符串达到给定的长度</h3>
+<p>用另一个字符串填充当前字符串(重复，如果需要的话)，以便产生的字符串达到给定的长度。填充从当前字符串的开始(左侧)应用的。** 不改变原字符串 **</p>
+<h4 id="语法-11">语法</h4>
+<p>str.padStart(targetLength [, padString])</p>
+<h4 id="参数-10">参数</h4>
+<p><strong>targetLength</strong> 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。<br>
+<strong>padString</strong> <em><strong>可选</strong></em> 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 &quot; &quot;（U+0020）。</p>
+<h4 id="返回值-8">返回值</h4>
+<p>在原字符串开头填充指定的填充字符串直到目标长度所形成的新字符串</p>
+<h4 id="示例-10">示例</h4>
+<pre><code>'abc'.padStart(10);         // &quot;       abc&quot;
+'abc'.padStart(10, &quot;foo&quot;);  // &quot;foofoofabc&quot;
+'abc'.padStart(6,&quot;123465&quot;); // &quot;123abc&quot;
+'abc'.padStart(8, &quot;0&quot;);     // &quot;00000abc&quot;
+'abc'.padStart(1);          // &quot;abc&quot;
+</code></pre>
+<h3 id="stringpadend-从当前字符串末尾添加字符串返回填充后达到指定长度的字符串">String.padEnd() 从当前字符串末尾添加字符串，返回填充后达到指定长度的字符串</h3>
+<p>用一个字符串填充当前字符串（如果需要的话则重复填充），返回填充后达到指定长度的字符串。从当前字符串的末尾（右侧）开始填充。** 不改变原字符串 **</p>
+<h4 id="语法-12">语法</h4>
+<p><code>str.padEnd(targetLength [, padString])</code></p>
+<h4 id="参数-11">参数</h4>
+<p><strong>targetLength</strong> 当前字符串需要填充到的目标长度。如果这个数值小于当前字符串的长度，则返回当前字符串本身。<br>
+<strong>padString</strong> 可选 填充字符串。如果字符串太长，使填充后的字符串长度超过了目标长度，则只保留最左侧的部分，其他部分会被截断。此参数的缺省值为 &quot; &quot;（U+0020）。</p>
+<h4 id="返回值-9">返回值</h4>
+<p>在原字符串末尾填充指定的填充字符串直到目标长度所形成的新字符串。</p>
+<h4 id="示例-11">示例</h4>
+<pre><code>'abc'.padEnd(10);          // &quot;abc       &quot;
+'abc'.padEnd(10, &quot;foo&quot;);   // &quot;abcfoofoof&quot;
+'abc'.padEnd(6, &quot;123456&quot;); // &quot;abc123&quot;
+'abc'.padEnd(1);           // &quot;abc&quot;
+</code></pre>
+<h3 id="stringrepeat-构造并返回一个新字符串该字符串包含被连接在一起的指定数量的字符串的副本">String.repeat() 构造并返回一个新字符串，该字符串包含被连接在一起的指定数量的字符串的副本</h3>
+<p>方法返回一个由替换值（replacement）替换一些或所有匹配的模式（pattern）后的新字符串。模式可以是一个字符串或者一个正则表达式，替换值可以是一个字符串或者一个每次匹配都要调用的回调函数。<strong>不改变原字符串</strong></p>
+<h4 id="语法-13">语法</h4>
+<p>str.replace(regexp|substr, newSubStr|function)</p>
+<h4 id="参数-12">参数</h4>
+<p><strong>regexp (pattern)</strong> 一个RegExp 对象或者其字面量。该正则所匹配的内容会被第二个参数的返回值替换掉。<br>
+<strong>substr (pattern)</strong> 一个将被 newSubStr 替换的 字符串。其被视为一整个字符串，而不是一个正则表达式。仅第一个匹配项会被替换。<br>
+<strong>newSubStr (replacement)</strong> 用于替换掉第一个参数在原字符串中的匹配部分的字符串。该字符串中可以内插一些特殊的变量名。参考下面的使用字符串作为参数。<br>
+<strong>function (replacement)</strong> 一个用来创建新子字符串的函数，该函数的返回值将替换掉第一个参数匹配到的结果。参考下面的指定一个函数作为参数。否以另外一个给定的子字符串开头，返回 true 或 false</p>
+<h4 id="返回值-10">返回值</h4>
+<p>一个部分或全部匹配由替代模式所取代的新的字符串。</p>
+<h4 id="示例-12">示例</h4>
+<pre><code>// 正则
+var str = 'Twas the night before Xmas...';
+str.replace(/xmas/i, 'Christmas'); // Twas the night before Christmas...;
+var str1 = &quot;Apples are round, and apples are juicy.&quot;;
+str.replace(/apples/gi, &quot;oranges&quot;); // oranges are round, and oranges are juicy.
+</code></pre>
+<h3 id="stringsearch-执行正则表达式和-string-对象之间的一个搜索匹配">String.search() 执行正则表达式和 String 对象之间的一个搜索匹配</h3>
+<h4 id="语法-14">语法</h4>
+<p><code>str.search(regexp)</code></p>
+<h4 id="参数-13">参数</h4>
+<p>** regexp ** 一个正则表达式（regular expression）对象。如果传入一个非正则表达式对象 obj，则会使用 new RegExp(obj) 隐式地将其转换为正则表达式对象。<br>
+** 返回值 ** 如果匹配成功，则 search() 返回正则表达式在字符串中首次匹配项的索引;否则，返回 -1。</p>
+<h4 id="示例-13">示例</h4>
+<pre><code>var str = &quot;hey JudE&quot;;
+var re = /[A-Z]/g;
+var re2 = /[.]/g;
+str.search(re); // 4
+str.search(re2); // -1
+</code></pre>
+<h3 id="stringsubstr-返回一个字符串中从指定位置开始到指定字符数的字符-注尽量用substring-替代它未来可能废弃">String.substr() 返回一个字符串中从指定位置开始到指定字符数的字符 <strong>注：尽量用substring() 替代它，未来可能废弃</strong></h3>
+<h4 id="语法-15">语法</h4>
+<p><code>str.substr(start[, length])</code></p>
+<h4 id="参数-14">参数</h4>
+<p>** start **  开始提取字符的位置。如果为负值，则被看作 strLength + start，其中 strLength 为字符串的长度（例如，如果 start 为 -3，则被看作 strLength + (-3)）。<br>
+** length ** 可选。提取的字符数。</p>
+<h4 id="示例-14">示例</h4>
+<pre><code>var str = &quot;abcdefghij&quot;;
+str.substr(1,2); // bc
+str.substr(-3,2); // hi
+str.substr(-3); // hij
+str.substr(1); // bcdefghij
+str.substr(-20,2); // ab
+str.substr(20,2); // ''
+</code></pre>
+<h3 id="stringsubstring-返回一个字符串在开始索引到结束索引之间的一个子集-或从开始索引直到字符串的末尾的一个子集">String.substring() 返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。</h3>
+<h4 id="语法-16">语法</h4>
+<p><code>str.substring(indexStart[, indexEnd])</code></p>
+<h4 id="参数-15">参数</h4>
+<p>** indexStart ** 需要截取的第一个字符的索引，该索引位置的字符作为返回的字符串的首字母。<br>
+** indexEnd ** 可选。一个 0 到字符串长度之间的整数，以该数字为索引的字符不包含在截取的字符串内。</p>
+<h4 id="返回值-11">返回值</h4>
+<p>包含给定字符串的指定部分的新字符串。</p>
+<h4 id="示例-15">示例</h4>
+<pre><code>var anyString = &quot;Mozilla&quot;;
+// 输出 Moz
+anyString.substring(0,3)
+anyString.substring(3,0)
+anyString.substring(3,-3)
+anyString.substring(3,NaN)
+anyString.substring(-2,3)
+anyString.substring(NaN,3)
+
+// 输出 Mozilla
+anyString.substring(0,7)
+anyString.substring(0,10)
+</code></pre>
+<h3 id="stringindexof-返回调用它的-string-对象中第一次出现的指定值的索引-如果未找到该值则返回-1">String.indexOf() 返回调用它的 String 对象中第一次出现的指定值的索引。如果未找到该值，则返回 -1</h3>
+<h4 id="语法-17">语法</h4>
+<p><code>str.indexOf(searchValue)</code><br>
+<code>str.indexOf(searchValue, fromIndex)</code></p>
+<h4 id="参数-16">参数</h4>
+<p>** searchValue ** 一个字符串表示被查找的值。如果没有提供确切地提供字符串，searchValue 会被强制设置为 &quot;undefined&quot;， 然后在当前字符串中查找这个值。<br>
+** fromIndex **  可选 表示开始查找的位置。可以是任意整数，默认值为 0。如果 fromIndex 小于 0，则查找整个字符串（等价于传入了 0）。如果 fromIndex 大于等于 str.length，则必返回 -1。</p>
+<h4 id="返回值-12">返回值</h4>
+<p>指定值的第一次出现的索引；如果没有找到，则返回 -1。若被查找的字符串是一个空字符串，则返回值在0---str.length 之间，即：</p>
+<ul>
+<li>fromIndex 小于等于 0 时，返回 0；</li>
+<li>fromIndex 大于 0 且小于等于 str.length 时，返回 fromIndex；</li>
+<li>fromIndex 大于字符串长度 str.length 时，返回 str.length。</li>
+</ul>
+<h4 id="示例-16">示例</h4>
+<pre><code>&quot;Blue Whale&quot;.indexOf(&quot;Blue&quot;);     // 返回  0
+&quot;Blue Whale&quot;.indexOf(&quot;Blute&quot;);    // 返回 -1
+&quot;Blue Whale&quot;.indexOf(&quot;Whale&quot;, 0); // 返回  5
+&quot;Blue Whale&quot;.indexOf(&quot;Whale&quot;, 5); // 返回  5
+&quot;Blue Whale&quot;.indexOf(&quot;&quot;, -1); // 返回 0
+&quot;Blue Whale&quot;.indexOf(&quot;&quot;, 9);      // 返回  9
+&quot;Blue Whale&quot;.indexOf(&quot;&quot;, 10);     // 返回 10
+&quot;Blue Whale&quot;.indexOf(&quot;&quot;, 11);     // 返回 10
+
+&quot;Blue Whale&quot;.indexOf(&quot;Blue&quot;) !== -1; // true
+&quot;Blue Whale&quot;.indexOf(&quot;Bloe&quot;) !== -1; // false
+</code></pre>
+<h3 id="stringreplace-返回一个由替换值replacement替换一些或所有匹配的模式pattern后的新字符串">String.replace() 返回一个由替换值（replacement）替换一些或所有匹配的模式（pattern）后的新字符串</h3>
+<p>返回一个由替换值（replacement）替换一些或所有匹配的模式（pattern）后的新字符串。模式可以是一个字符串或者一个正则表达式，替换值可以是一个字符串或者一个每次匹配都要调用的回调函数。<strong>原字符串不会改变。</strong></p>
+<h4 id="语法-18">语法</h4>
+<p><code>str.replace(regexp|substr, newSubStr|function)</code></p>
+<h4 id="参数-17">参数</h4>
+<p>** regexp (pattern)** 一个RegExp 对象或者其字面量。该正则所匹配的内容会被第二个参数的返回值替换掉。<br>
+** substr (pattern)** 一个将被 newSubStr 替换的 字符串。其被视为一整个字符串，而不是一个正则表达式。仅第一个匹配项会被替换。<br>
+** newSubStr (replacement)** 用于替换掉第一个参数在原字符串中的匹配部分的字符串。该字符串中可以内插一些特殊的变量名。<br>
+** function (replacement)**一个用来创建新子字符串的函数，该函数的返回值将替换掉第一个参数匹配到的结果。参考下面的指定一个函数作为参数。</p>
+<h4 id="返回值-13">返回值</h4>
+<p>一个部分或全部匹配由替代模式所取代的新的字符串。</p>
+<h4 id="示例-17">示例</h4>
+<pre><code>var str = 'Twas the night before Xmas...';
+str.replace(/xmas/i, 'Christmas'); // Twas the night before Christmas...
+&quot;Apples are round, and apples are juicy.&quot;.str.replace( /apples/gi, &quot;oranges&quot;); // oranges are round, and oranges are juicy.
+
+// 交换
+&quot;John Smith&quot;.replace(/(\w+)\s(\w+)/, &quot;$2, $1&quot;); // Smith, John
+</code></pre>
+<h3 id="stringvalueof-返回一个string对象的原始值">String.valueOf() 返回一个String对象的原始值</h3>
+<h4 id="语法-19">语法</h4>
+<p><code>str.valueOf()</code></p>
+<h4 id="返回值-14">返回值</h4>
+<p>一个字符串代表着给定String 对象的初始值。</p>
+<h4 id="示例-18">示例</h4>
+<pre><code>x = new String(&quot;Hello world&quot;);
+x.valueOf()   // &quot;Hello world&quot;
+</code></pre>
+<h3 id="stringstartswith-判断当前字符串是语法">String.startsWith() 判断当前字符串是语法</h3>
+<h3 id="stringendswith-判断当前字符串是否是以另外一个给定的子字符串结尾的返回-true-或-false">String.endsWith() 判断当前字符串是否是以另外一个给定的子字符串“结尾”的，返回 true 或 false</h3>
+<h3 id="stringincludes-判断一个字符串是否包含在另一个字符串中返回-true-或-false">String.includes() 判断一个字符串是否包含在另一个字符串中，返回 true 或 false</h3>
+<h3 id="stringmatchall-返回一个包含所有匹配正则表达式的结果及分组捕获组的迭代器">String.matchAll() 返回一个包含所有匹配正则表达式的结果及分组捕获组的迭代器。</h3>
+<h3 id="stringtostring-返回指定对象的字符串形式">String.toString() 返回指定对象的字符串形式</h3>
+<h3 id="stringtrimstart-从字符串的开头删除空格-trimleft是此方法的别名">String.trimStart() 从字符串的开头删除空格。trimLeft()是此方法的别名。</h3>
+<h3 id="stringtrimend-从一个字符串的末端移除空白字符-trimright-是这个方法的别名">String.trimEnd() 从一个字符串的末端移除空白字符。trimRight() 是这个方法的别名。</h3>
+<h3 id="stringnormalize-按照指定的一种-unicode-正规形式将当前字符串正规化-如果该值不是字符串则首先将其转换为一个字符串">String.normalize() 按照指定的一种 Unicode 正规形式将当前字符串正规化。（如果该值不是字符串，则首先将其转换为一个字符串）</h3>
+<h3 id="stringcharcodeat-返回0到65535之间的整数表示给定索引处的utf-16代码单元">String.charCodeAt() 返回0到65535之间的整数，表示给定索引处的UTF-16代码单元</h3>
+<h3 id="stringcodepointat-返回一个-unicode-编码点值的非负整数">String.codePointAt() 返回一个 Unicode 编码点值的非负整数。</h3>
+<h3 id="stringlastindexof-返回调用string-对象的指定值最后一次出现的索引如果没找到这个特定值则返回-1">String.lastIndexOf() 返回调用String 对象的指定值最后一次出现的索引，如果没找到这个特定值则返回-1 。</h3>
+<h3 id="stringtolowercase-会将调用该方法的字符串值转为小写形式">String.toLowerCase() 会将调用该方法的字符串值转为小写形式，</h3>
+<h3 id="stringtouppercase-返回一个将调用字符串转换为大写形式的值-如果这个值不是字符串则会被变成字符串">String.toUpperCase()  返回一个将调用字符串转换为大写形式的值。（如果这个值不是字符串则会被变成字符串</h3>
+<h3 id="stringiterator-返回一个新的iterator对象它遍历字符串的代码点返回每一个代码点的字符串值">String<a href="">@@iterator</a> 返回一个新的Iterator对象，它遍历字符串的代码点，返回每一个代码点的字符串值。</h3>
+<h3 id="stringlocalecompare-返回一个数字来指示一个参考字符串是否在排序顺序前面或之后或与给定字符串相同">String.localeCompare() 返回一个数字来指示一个参考字符串是否在排序顺序前面或之后或与给定字符串相同。</h3>
+<h3 id="stringtolocalelowercase-根据任何指定区域语言环境设置的大小写映射返回调用字符串被转换为小写的格式">String.toLocaleLowerCase() 根据任何指定区域语言环境设置的大小写映射，返回调用字符串被转换为小写的格式。</h3>
+<h3 id="stringtolocaleuppercase-使用本地化locale-specific的大小写映射规则将输入的字符串转化成大写形式并返回结果字符串">String.toLocaleUpperCase() 使用本地化（locale-specific）的大小写映射规则将输入的字符串转化成大写形式并返回结果字符串。</h3>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://zhi-he.github.io/2020-nian-5-yue-mian-shi-ji-yao-vue/">
+              <h3 class="post-title">
+                下一篇：2020年5月面试纪要
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">百无一用是个“搬砖的”！！！</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://zhi-he.github.io" target="_blank">一介码农</a> | <a class="rss" href="https://zhi-he.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ef1603f190a7229ea2e9',
+        clientSecret: 'f9d9030a1b3ae3666da2bb49c29b0fc8d1117670',
+        repo: 'zhi-he.github.io',
+        owner: 'zhi-he',
+        admin: ['zhi-he'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
