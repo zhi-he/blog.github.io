@@ -7,7 +7,7 @@ function treeFindPath (tree, func, path = []) { if (!tree) return [] for (const 
 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
 示例 1:
 输入：s = &#34;babad&#34; 输出：&#34;bab&#34; 解释：&#34;aba&#34; 同样是符合题意的答案。 示例 2:
-输入：s = &#34;cbbd&#34; 输出：&#34;bb&#34; 解题 回文字符串，无非有两种类型，&lsquo;ada&rsquo;和&rsquo;baab&rsquo;，分为奇偶长度两种。
+输入：s = &#34;cbbd&#34; 输出：&#34;bb&#34; 解题 回文字符串，无非有两种类型，ada和baab，分为奇偶长度两种。
 单考虑偶数的话，如下：
 分析👇
 // 现有一字符串 str const str = &#39;cbaabc&#39; // 当 str[2]===str[3] str[1]===str[4] str[0]===str[5] // 则 str 为回文字符串 有没有看出什么规律，左侧的下标做减法，右侧的下标做加法。只要都相等，即是回文字符串！
